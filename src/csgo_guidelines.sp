@@ -26,7 +26,7 @@ public void OnPluginStart() {
 	RegConsoleCmd("sm_rules", Command_Rules);
 	RegConsoleCmd("sm_guidelines", Command_Rules);
 
-	g_cv[EnableGuidelinesMessage] = CreateConVar("sm_enablerulesmessage", "0", "Enable or disabled server guidelines menu message", FCVAR_NOTIFY, true, 0.0, true, 1.0);
+	g_cv[EnableGuidelinesMessage] = CreateConVar("sm_enablerulesmessage", "0", "Enable or disabled server welcome message", FCVAR_NOTIFY, true, 0.0, true, 1.0);
 	
 	g_hClientRulesCookie = RegClientCookie("Rules", "CSFIRE Community Guidelines", CookieAccess_Private);
 
@@ -61,8 +61,8 @@ public void Event_OnPlayerSpawn(Event hEvent, const char[] name, bool dontBroadc
 
 	int client = GetClientOfUserId(GetEventInt(hEvent, "userid"));
 	
-	if(!IsClientValid(client)) {
-
+	if(!IsClientValid(client) || g_bAcceptedRules[client]) {
+		PrintToChatAll("CLient skipped");
 		return;
 	}
 	CreateTimer(27.0, GuidelinesDelay, GetClientUserId(client), TIMER_FLAG_NO_MAPCHANGE);
@@ -72,8 +72,7 @@ public Action GuidelinesDelay(Handle timer, any data) {
 
 	int client = GetClientOfUserId(data);
 	
-	if (!IsClientValid(client) || !IsPlayerAlive(client) || g_bAcceptedRules[client]) {
-		PrintToChatAll("CLient skipped");
+	if (!IsClientValid(client) || !IsPlayerAlive(client)) {
 		return Plugin_Continue;
 	}
 	PrintToChatAll("CLient skipped but not optimized");
