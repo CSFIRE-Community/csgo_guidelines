@@ -26,7 +26,7 @@ public void OnPluginStart() {
 	RegConsoleCmd("sm_rules", Command_Rules);
 	RegConsoleCmd("sm_guidelines", Command_Rules);
 
-	g_cv[EnableGuidelinesMessage] = CreateConVar("sm_enablerulesmessage", "0", "Enable or disabled server welcome message", FCVAR_NOTIFY, true, 0.0, true, 1.0);
+	g_cv[EnableGuidelinesMessage] = CreateConVar("sm_enablerulesmessage", "0", "Enable or disabled server guidelines menu message", FCVAR_NOTIFY, true, 0.0, true, 1.0);
 	
 	g_hClientRulesCookie = RegClientCookie("Rules", "CSFIRE Community Guidelines", CookieAccess_Private);
 
