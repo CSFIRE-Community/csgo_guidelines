@@ -72,7 +72,7 @@ public Action GuidelinesDelay(Handle timer, any data) {
 
 	int client = GetClientOfUserId(data);
 	
-	if (!IsClientValid(client) || !IsPlayerAlive(client) || g_bAcceptedRules[client]/*!g_cv[EnableGuidelinesMessage].BoolValue*/) {
+	if (!IsClientValid(client) || !IsPlayerAlive(client) || g_bAcceptedRules[client]) {
 		PrintToChatAll("CLient skipped");
 		return Plugin_Continue;
 	}
